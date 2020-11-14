@@ -1,18 +1,30 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div class="container text-center">
+      <h3>İnsan Kaynakları Yönetim Sistemi</h3>
+      <div class="btn-group-vertical">
+        <router-link class="btn btn-primary" router-tag="button" to="/applicant">
+          Aday Girişi
+        </router-link>
+
+        <router-link class="btn btn-secondary" router-tag="button" to="/hr">
+          İK Girişi
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
-export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
-};
 </script>
+
+<style scoped>
+.container .btn-group-vertical {
+}
+
+h3 {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+</style>
