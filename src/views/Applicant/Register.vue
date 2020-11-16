@@ -3,33 +3,47 @@
 <template>
   <div class="register">
     <Navbar />
+    <ApplicantNav />
+
     <div class="container">
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-        <b-form-group id="name-group" label="Ad" label-for="name">
-          <b-form-input
-            id="name"
-            v-model="form.name"
-            type="text"
-            required
-            placeholder="Ad"
-          ></b-form-input>
-        </b-form-group>
+        <b-form-row>
+          <b-form-group
+            id="name-group"
+            label="Ad"
+            label-for="name"
+            class="col-md-6"
+          >
+            <b-form-input
+              id="name"
+              v-model="form.name"
+              type="text"
+              required
+              placeholder="Ad"
+            ></b-form-input>
+          </b-form-group>
 
-        <b-form-group id="surname-group" label="Soyad" label-for="surname">
-          <b-form-input
-            id="surname"
-            v-model="form.surname"
-            type="text"
-            required
-            placeholder="Soyad"
-          ></b-form-input>
-        </b-form-group>
+          <b-form-group
+            id="surname-group"
+            label="Soyad"
+            label-for="surname"
+            class="col-md-6"
+          >
+            <b-form-input
+              id="surname"
+              v-model="form.surname"
+              type="text"
+              required
+              placeholder="Soyad"
+            ></b-form-input>
+          </b-form-group>
+        </b-form-row>
 
         <b-form-group id="address-group" label="Adres" label-for="address">
           <b-form-textarea
             id="address"
             v-model="form.address"
-            placeholder="Adres"
+            placeholder="İkamet adresiniz"
             rows="3"
             required
             no-resize
@@ -48,15 +62,15 @@
 
         <b-form-group
           id="email-group"
-          label="Email"
+          label="E-posta"
           label-for="email"
-          description="E-posta adresiniz sadece başvuru sonucu bilgilendirmesi için kullanılacaktır."
+          description="E-posta adresiniz sadece başvuru süreci için kullanılacaktır."
         >
           <b-form-input
             id="email"
             v-model="form.email"
             type="email"
-            placeholder="Enter email"
+            placeholder="E-posta"
             required
           ></b-form-input>
         </b-form-group>
@@ -70,6 +84,7 @@
             id="birthdate"
             v-model="form.birthdate"
             locale="tr-TR"
+            placeholder="Doğum yılınız"
           ></b-form-datepicker>
         </b-form-group>
         <b-form-group
@@ -86,30 +101,148 @@
           </b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="licences-group"
-          label="Ehliyetler"
-          label-for="licences"
+        <b-card
+          header="Ehliyet"
+          class="mt-3"
         >
-          <b-form-checkbox-group
-            id="licences"
-            v-model="form.licences"
-            :options="licenceSelect"
+          <b-form-group
+              id="licences-group"
           >
-          </b-form-checkbox-group>
+            <b-form-checkbox-group
+                id="licences"
+                v-model="form.licences"
+                :options="licenceSelect"
+            >
+            </b-form-checkbox-group>
 
-        </b-form-group>
-        <b-form-group
-          id="companyName-group"
-          label="Firma adı"
-          label-for="companyName"
+          </b-form-group>
+        </b-card>
+
+        <b-card
+            header="Eğitim"
+            class="mt-3"
         >
-          <b-form-input
-            id="companyName"
-            v-model="form.experiences.companyName"
-            placeholder="Firma adı"
-          ></b-form-input>
-        </b-form-group>
+          <b-form-group
+              id="schoolName-group"
+              label="Okul"
+              label-for="schoolName"
+          >
+            <b-form-input
+                id="schoolName"
+                v-model="form.education.schoolName"
+                placeholder="Okul adı"
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+              id="degree-group"
+              label="Tür"
+              label-for="degree"
+          >
+            <b-form-input
+              id="degree"
+              v-model="form.education.degree"
+              placeholder="Örn. Lise, Yüksek Lisans"
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+            id="profession-group"
+            label="Uzmanlık"
+            label-for="profession"
+          >
+            <b-form-input
+              id="profession"
+              v-model="form.education.profession"
+              placeholder="Örn. Sayısal, Endüstri Mühendisliği vb."
+            ></b-form-input>
+          </b-form-group>
+          <b-form-row>
+            <b-form-group
+              id="startDate-group"
+              label="Başlangıç"
+              label-for="startDate"
+              class="col-md-6"
+            >
+              <b-form-input
+                id="startDate"
+                v-model="form.education.startDate"
+                type="text"
+                required
+                placeholder="Yıl olarak"
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group
+              id="endDate-group"
+              label="Bitiş"
+              label-for="endDate"
+              class="col-md-6"
+            >
+              <b-form-spinbutton
+                id="endDate"
+                v-model="form.education.endDate"
+                min="1960"
+                max="2020"
+                wrap
+                required
+                placeholder="Yıl"
+              ></b-form-spinbutton >
+            </b-form-group>
+          </b-form-row>
+
+          <button type="button" class="btn btn-success float-right" style="margin-top: auto;">Deneyim ekle</button>
+        </b-card>
+
+        <b-card
+          header="İş deneyimi"
+          class="mt-3"
+        >
+          <b-form-group
+            id="companyName-group"
+            label="Firma adı"
+            label-for="companyName"
+          >
+            <b-form-input
+              id="companyName"
+              v-model="form.experiences.companyName"
+              placeholder="Firma adı"
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+            id="location-group"
+            label="Konum"
+            label-for="location"
+          >
+            <b-form-input
+              id="location"
+              v-model="form.experiences.location"
+              placeholder="Firmanın bulunduğu il"
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+              id="position0rTask-group"
+              label="Pozisyon veya Görev"
+              label-for="positionOrTask"
+          >
+            <b-form-input
+                id="positionOrTask"
+                v-model="form.experiences.positionOrTask"
+                placeholder="Görev"
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+              id="duration-group"
+              label="Çalışma süresi"
+              label-for="location"
+          >
+            <b-form-input
+                id="duration"
+                v-model="form.experiences.duration"
+                placeholder="Yıl olarak"
+            ></b-form-input>
+          </b-form-group>
+
+          <button type="button" class="btn btn-success float-right" style="margin-top: auto;">Deneyim ekle</button>
+        </b-card>
 
         <b-button type="submit" variant="primary">Gönder</b-button>
         <b-button type="reset" variant="danger">Sıfırla</b-button>
@@ -124,11 +257,13 @@
 <script>
 // @ is an alias to /src
 import Navbar from "@/components/Navbar.vue";
+import ApplicantNav from "@/components/ApplicantNav";
 
 export default {
   name: "ApplicantRegistration",
   components: {
-    Navbar
+    Navbar,
+    ApplicantNav
   },
   data() {
     return {
@@ -141,15 +276,17 @@ export default {
         birthdate: "",
         languages: "",
         licences: [],
-        education: {
-          id: "",
-          schoolName: "",
-          degree: "",
-          profession: "",
-          startDate: "",
-          endDate: "",
-          avg: ""
-        },
+        education: [
+          {
+            id: "",
+            schoolName: "",
+            degree: "",
+            profession: "",
+            startDate: '',
+            endDate: '',
+            avg: ""
+          }
+        ],
         experiences: {
           id: "",
           companyName: "",
@@ -158,6 +295,7 @@ export default {
           duration: ""
         }
       },
+
       licenceSelect: [
         { text: 'M', value: 'm' },
         { text: 'A1', value: 'a1' },
