@@ -70,37 +70,42 @@
             id="email"
             v-model="form.email"
             type="email"
-            placeholder="E-posta"
+            placeholder="İletişim e-posta adresiniz"
             required
           ></b-form-input>
         </b-form-group>
 
         <b-form-group
           id="birthdate-group"
-          label="Doğum tarihi"
+          label="Doğum yılı"
           label-for="birthdate"
         >
-          <b-form-datepicker
+          <b-form-spinbutton
             id="birthdate"
             v-model="form.birthdate"
-            locale="tr-TR"
-            placeholder="Doğum yılınız"
-          ></b-form-datepicker>
+            min="1960"
+            max="2020"
+            placeholder="Yıl"
+            wrap
+            required
+          ></b-form-spinbutton>
         </b-form-group>
-        <b-form-group
-          id="languages-group"
-          label="Yabancı diller"
-          label-for="languages"
-        >
-          <b-form-input
-            id="languages"
-            v-model="form.languages"
-            placeholder="Örn. İngilizce, Almanca"
+        <b-card
+            header="Yabancı dil"
+            class="mt-3"
           >
-
-          </b-form-input>
-        </b-form-group>
-
+          <b-form-group
+            id="languages-group"
+          >
+            <b-form-input
+              id="languages"
+              v-model="form.languages"
+              placeholder="Örn. İngilizce, Almanca"
+            >
+            </b-form-input>
+          </b-form-group>
+          <button type="button" class="btn btn-success float-right" style="margin-top: auto;">Dil ekle</button>
+        </b-card>
         <b-card
           header="Ehliyet"
           class="mt-3"
@@ -109,9 +114,9 @@
               id="licences-group"
           >
             <b-form-checkbox-group
-                id="licences"
-                v-model="form.licences"
-                :options="licenceSelect"
+              id="licences"
+              v-model="form.licences"
+              :options="licenceSelect"
             >
             </b-form-checkbox-group>
 
@@ -162,13 +167,15 @@
               label-for="startDate"
               class="col-md-6"
             >
-              <b-form-input
-                id="startDate"
+              <b-form-spinbutton
+                id="endDate"
                 v-model="form.education.startDate"
-                type="text"
+                min="1990"
+                max="2020"
+                wrap
                 required
-                placeholder="Yıl olarak"
-              ></b-form-input>
+                placeholder="--"
+              ></b-form-spinbutton>
             </b-form-group>
 
             <b-form-group
@@ -180,16 +187,16 @@
               <b-form-spinbutton
                 id="endDate"
                 v-model="form.education.endDate"
-                min="1960"
+                min="1990"
                 max="2020"
                 wrap
                 required
-                placeholder="Yıl"
-              ></b-form-spinbutton >
+                placeholder="--"
+              ></b-form-spinbutton>
             </b-form-group>
           </b-form-row>
 
-          <button type="button" class="btn btn-success float-right" style="margin-top: auto;">Deneyim ekle</button>
+          <button type="button" class="btn btn-success float-right" style="margin-top: auto;">Okul ekle</button>
         </b-card>
 
         <b-card
@@ -219,29 +226,29 @@
             ></b-form-input>
           </b-form-group>
           <b-form-group
-              id="position0rTask-group"
-              label="Pozisyon veya Görev"
-              label-for="positionOrTask"
+            id="position0rTask-group"
+            label="Pozisyon veya Görev"
+            label-for="positionOrTask"
           >
             <b-form-input
-                id="positionOrTask"
-                v-model="form.experiences.positionOrTask"
-                placeholder="Görev"
+              id="positionOrTask"
+              v-model="form.experiences.positionOrTask"
+              placeholder="Görev"
             ></b-form-input>
           </b-form-group>
           <b-form-group
-              id="duration-group"
-              label="Çalışma süresi"
-              label-for="location"
+            id="duration-group"
+            label="Çalışma süresi"
+            label-for="location"
           >
             <b-form-input
-                id="duration"
-                v-model="form.experiences.duration"
-                placeholder="Yıl olarak"
+              id="duration"
+              v-model="form.experiences.duration"
+              placeholder="Yıl olarak"
             ></b-form-input>
           </b-form-group>
 
-          <button type="button" class="btn btn-success float-right" style="margin-top: auto;">Deneyim ekle</button>
+          <button type="button" class="btn btn-success float-right" style="margin-top: auto;">İş deneyimi ekle</button>
         </b-card>
 
         <b-button type="submit" variant="primary">Gönder</b-button>
