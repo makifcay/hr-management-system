@@ -39,7 +39,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [ ] Tablo yapısı
 - [ ] Filtreleme mekanizması
 
-##Proje isterleri
+## Proje isterleri
 - [ ] Kişi ekleme/çıkarma/güncelleme 15 puan
 - [ ] İkili arama ağacındaki tüm kişilerin adlarını düzeyleri ile birlikte Listeleme, derinlik ve eleman sayısı 15 puan
 - [ ] İşe başvuran tüm adayların bilgilerini listeleme 5 puan
